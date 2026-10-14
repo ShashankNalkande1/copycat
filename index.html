@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>IDEA VAULT — The Copycat Playbook</title>
+<meta name="description" content="How India's biggest startups copied, localized, and built empires — plus every source you need to do it." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#faf6ee;
+    --bg-2:#f4ecdc;
+    --panel:#ffffff;
+    --panel-2:#fdfaf3;
+    --stroke:rgba(160,120,60,.14);
+    --stroke-soft:rgba(160,120,60,.08);
+    --stroke-hot:rgba(200,130,30,.45);
+    --txt:#4a3f31;
+    --txt-2:#6b5d4a;
+    --muted:#9c8f78;
+    --muted-2:#b0a48d;
+    --gold:#c98a1e;
+    --gold-2:#e0a63a;
+    --gold-soft:#f5e2b8;
+    --amber:#a86613;
+    --emerald:#0d8f68;
+    --mint:#16a87c;
+    --coral:#d8546b;
+    --rose:#c96a7e;
+    --plum:#8b5a7a;
+    --sky:#5b8ba8;
+    --r:16px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--txt);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    line-height:1.65;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* BG */
+  .bg-fx{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+  .glow{position:absolute;border-radius:50%;filter:blur(130px);animation:float 28s ease-in-out infinite}
+  .g1{width:680px;height:680px;background:rgba(245,226,184,.75);top:-300px;left:-200px}
+  .g2{width:540px;height:540px;background:rgba(190,225,205,.45);top:22%;right:-220px;animation-delay:-9s}
+  .g3{width:520px;height:520px;background:rgba(250,205,180,.45);bottom:-200px;left:26%;animation-delay:-15s}
+  @keyframes float{
+    0%,100%{transform:translate(0,0) scale(1)}
+    33%{transform:translate(50px,-40px) scale(1.1)}
+    66%{transform:translate(-40px,35px) scale(.94)}
+  }
+  .grid-overlay{
+    position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background-image:
+      linear-gradient(rgba(180,140,70,.055) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(180,140,70,.055) 1px,transparent 1px);
+    background-size:76px 76px;
+    mask-image:radial-gradient(ellipse 85% 65% at 50% 0%,#000 8%,transparent 72%);
+    -webkit-mask-image:radial-gradient(ellipse 85% 65% at 50% 0%,#000 8%,transparent 72%);
+  }
+  .vignette{
+    position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:radial-gradient(ellipse at 50% 0%,transparent 40%,rgba(250,246,238,.85) 100%);
+  }
+
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:100;
+    backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+    background:rgba(250,246,238,.88);
+    border-bottom:1px solid var(--stroke);
+  }
+  .nav-in{
+    max-width:1320px;margin:0 auto;padding:15px 26px;
+    display:flex;align-items:center;justify-content:space-between;gap:18px;
+  }
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:1rem;letter-spacing:-.02em;color:var(--txt)}
+  .brand .mark{
+    width:26px;height:26px;border-radius:8px;
+    background:linear-gradient(140deg,var(--gold-2),var(--amber));
+    display:grid;place-items:center;
+    box-shadow:0 4px 12px rgba(201,138,30,.35),inset 0 0 0 1px rgba(255,255,255,.5);
+  }
+  .brand .mark::after{content:'';width:9px;height:9px;border-radius:2px;background:#fff;transform:rotate(45deg)}
+  .brand em{
+    font-style:normal;
+    background:linear-gradient(100deg,var(--gold),var(--amber));
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .nav-links{display:flex;gap:22px;align-items:center}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:.82rem;font-weight:500;transition:.22s}
+  .nav-links a:hover{color:var(--gold)}
+  .nav-pill{
+    padding:6px 12px;border-radius:100px;
+    background:rgba(201,138,30,.1);border:1px solid rgba(201,138,30,.26);
+    color:var(--gold)!important;font-weight:600!important;font-size:.76rem!important;
+  }
+  .nav-pill:hover{background:rgba(201,138,30,.2)}
+  @media(max-width:900px){.nav-links a:not(.nav-pill){display:none}}
+
+  /* CONTAINER */
+  .container{max-width:1320px;margin:0 auto;padding:0 26px}
+
+  /* HERO */
+  .hero{max-width:1320px;margin:0 auto;padding:90px 26px 60px;text-align:center;position:relative}
+  .badge{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:7px 15px 7px 11px;border-radius:100px;
+    background:rgba(201,138,30,.1);
+    border:1px solid rgba(201,138,30,.22);
+    font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--amber);margin-bottom:32px;
+    animation:fadeUp .8s ease both;
+  }
+  .badge .pip{
+    width:6px;height:6px;border-radius:50%;background:var(--mint);
+    box-shadow:0 0 10px var(--mint);animation:pulse 1.8s infinite;
+  }
+  @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.5}}
+
+  h1.hero-title{
+    font-family:'Instrument Serif',Georgia,serif;
+    font-size:clamp(2.5rem,6.8vw,5rem);
+    font-weight:400;line-height:1.03;letter-spacing:-.028em;
+    margin-bottom:26px;color:var(--txt);
+    animation:fadeUp .8s .08s ease both;
+  }
+  h1 .shimmer{
+    font-style:italic;
+    background:linear-gradient(100deg,var(--gold) 0%,var(--gold-2) 40%,var(--amber) 70%,var(--gold) 100%);
+    background-size:200% auto;
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    animation:shimmer 6s linear infinite;
+  }
+  @keyframes shimmer{to{background-position:200% center}}
+  h1 .dead{position:relative;color:#c0b094;font-style:italic}
+  h1 .dead::after{
+    content:'';position:absolute;left:-3%;top:52%;width:106%;height:2px;
+    background:var(--rose);border-radius:2px;transform:rotate(-1.2deg);opacity:.7;
+  }
+
+  .hero-sub{
+    max-width:660px;margin:0 auto 40px;color:var(--txt-2);
+    font-size:clamp(.96rem,1.85vw,1.1rem);font-weight:300;letter-spacing:-.005em;
+    animation:fadeUp .8s .16s ease both;
+  }
+  .hero-sub strong{color:var(--amber);font-weight:600}
+  .hero-sub mark{background:rgba(224,166,58,.22);color:var(--amber);padding:1px 6px;border-radius:5px;font-weight:500}
+
+  .hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;animation:fadeUp .8s .24s ease both}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:13px 26px;border-radius:100px;border:none;cursor:pointer;
+    font-family:'Inter';font-size:.87rem;font-weight:600;letter-spacing:-.005em;
+    text-decoration:none;transition:.26s;
+  }
+  .btn-primary{
+    background:linear-gradient(100deg,var(--gold-2),var(--amber));color:#fff;
+    box-shadow:0 10px 30px -10px rgba(201,138,30,.7);
+  }
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 40px -10px rgba(201,138,30,.9);filter:brightness(1.05)}
+  .btn-ghost{
+    background:#fff;color:var(--txt-2);border:1px solid var(--stroke);
+    box-shadow:0 4px 14px -8px rgba(120,90,40,.15);
+  }
+  .btn-ghost:hover{background:var(--panel-2);border-color:var(--stroke-hot);color:var(--gold);transform:translateY(-3px)}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+  /* SECTION BASE */
+  section.block{padding:70px 0;position:relative}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;
+  }
+  .eyebrow::before{content:'';width:24px;height:1.5px;background:var(--gold-2)}
+  .block-title{
+    font-family:'Instrument Serif',serif;
+    font-size:clamp(1.8rem,4.2vw,2.7rem);
+    font-weight:400;letter-spacing:-.025em;line-height:1.12;
+    margin-bottom:18px;color:var(--txt);
+  }
+  .block-title em{
+    font-style:italic;
+    background:linear-gradient(100deg,var(--gold),var(--amber));
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .block-lede{
+    font-size:1rem;color:var(--txt-2);max-width:720px;
+    margin-bottom:42px;font-weight:300;line-height:1.7;
+  }
+  .block-lede strong{color:var(--amber);font-weight:600}
+
+  /* PLAYBOOK TIMELINE */
+  .playbook{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;position:relative}
+  @media(max-width:900px){.playbook{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.playbook{grid-template-columns:1fr}}
+  .step{
+    background:#fff;border:1px solid var(--stroke);border-radius:var(--r);
+    padding:26px 22px 24px;position:relative;
+    box-shadow:0 6px 24px -16px rgba(120,90,40,.22);
+    transition:.3s;
+  }
+  .step:hover{transform:translateY(-5px);border-color:var(--stroke-hot);box-shadow:0 20px 40px -22px rgba(201,138,30,.4)}
+  .step .num{
+    font-family:'Instrument Serif',serif;font-size:2.6rem;line-height:1;
+    color:var(--gold-2);opacity:.75;margin-bottom:12px;
+  }
+  .step h3{
+    font-family:'Instrument Serif',serif;font-size:1.25rem;font-weight:400;
+    color:var(--txt);margin-bottom:10px;letter-spacing:-.01em;
+  }
+  .step p{font-size:.86rem;color:var(--txt-2);line-height:1.6;margin-bottom:14px}
+  .step .tagline{
+    font-family:'JetBrains Mono',monospace;font-size:.68rem;
+    letter-spacing:.1em;text-transform:uppercase;
+    color:var(--muted);padding-top:12px;border-top:1px dashed var(--stroke);
+  }
+  .step::after{
+    content:'→';position:absolute;right:-14px;top:50%;
+    transform:translateY(-50%);font-size:1.4rem;color:var(--gold-2);opacity:.45;
+  }
+  .step:last-child::after{display:none}
+  @media(max-width:900px){.step::after{display:none}}
+
+  /* CASE STUDY CARDS */
+  .cases{display:grid;gap:18px}
+  .case{
+    background:#fff;border:1px solid var(--stroke);border-radius:20px;
+    overflow:hidden;box-shadow:0 10px 40px -26px rgba(120,90,40,.28);
+    transition:.3s;
+  }
+  .case:hover{border-color:var(--stroke-hot);box-shadow:0 24px 55px -28px rgba(201,138,30,.4)}
+  .case-head{
+    display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;
+    padding:24px 28px;cursor:pointer;user-select:none;
+    transition:.22s;
+  }
+  .case:hover .case-head{background:linear-gradient(90deg,rgba(245,226,184,.22),transparent)}
+  .case-icon{
+    width:54px;height:54px;border-radius:14px;
+    display:grid;place-items:center;font-size:1.5rem;
+    background:linear-gradient(140deg,rgba(245,226,184,.75),rgba(255,255,255,.5));
+    border:1px solid rgba(201,138,30,.22);
+    flex:0 0 54px;
+  }
+  .case-meta{min-width:0}
+  .case-meta h3{
+    font-family:'Instrument Serif',serif;font-size:1.5rem;font-weight:400;
+    letter-spacing:-.015em;color:var(--txt);line-height:1.15;margin-bottom:5px;
+  }
+  .case-meta h3 em{
+    font-style:italic;color:var(--gold);
+  }
+  .case-meta .sub{
+    font-family:'JetBrains Mono',monospace;font-size:.72rem;
+    color:var(--muted);letter-spacing:.02em;
+  }
+  .case-meta .sub strong{color:var(--amber);font-weight:600}
+  .case-expand{
+    width:36px;height:36px;border-radius:50%;
+    background:var(--panel-2);border:1px solid var(--stroke);
+    display:grid;place-items:center;color:var(--gold);
+    font-size:1.2rem;font-weight:400;transition:.3s;
+    flex:0 0 36px;
+  }
+  .case.open .case-expand{transform:rotate(45deg);background:linear-gradient(140deg,var(--gold-2),var(--amber));color:#fff;border-color:transparent}
+
+  .case-body{
+    max-height:0;overflow:hidden;transition:max-height .55s cubic-bezier(.4,0,.2,1);
+    border-top:1px solid transparent;
+  }
+  .case.open .case-body{max-height:2400px;border-top-color:var(--stroke)}
+
+  .case-inner{padding:32px 34px 36px}
+  .case-cols{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:26px}
+  @media(max-width:820px){.case-cols{grid-template-columns:1fr;gap:22px}}
+  .case-col h4{
+    font-family:'JetBrains Mono',monospace;
+    font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:12px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .case-col h4::before{content:'';width:18px;height:1.5px;background:var(--gold-2)}
+  .case-col p{font-size:.9rem;color:var(--txt-2);line-height:1.75;margin-bottom:10px}
+  .case-col p:last-child{margin-bottom:0}
+  .case-col strong{color:var(--txt);font-weight:600}
+
+  .case-list{list-style:none;display:grid;gap:10px}
+  .case-list li{
+    font-size:.86rem;color:var(--txt-2);line-height:1.65;
+    padding-left:22px;position:relative;
+  }
+  .case-list li::before{
+    content:'→';position:absolute;left:0;top:0;
+    color:var(--gold-2);font-weight:600;
+  }
+  .case-list li strong{color:var(--txt);font-weight:600}
+
+  .case-verdict{
+    background:linear-gradient(100deg,rgba(245,226,184,.35),rgba(255,255,255,.4));
+    border-left:3px solid var(--gold-2);
+    padding:18px 22px;border-radius:0 14px 14px 0;
+    font-size:.95rem;color:var(--txt);line-height:1.65;
+    font-style:italic;font-family:'Instrument Serif',serif;
+  }
+  .case-verdict strong{color:var(--amber);font-style:normal;font-weight:600}
+
+  .case-metrics{
+    display:flex;gap:12px;flex-wrap:wrap;margin-top:22px;
+  }
+  .metric{
+    padding:12px 18px;border-radius:12px;
+    background:var(--panel-2);border:1px solid var(--stroke);
+    flex:1;min-width:130px;
+  }
+  .metric b{
+    display:block;font-family:'Instrument Serif',serif;
+    font-size:1.5rem;font-weight:400;color:var(--amber);line-height:1.1;
+  }
+  .metric span{
+    font-family:'JetBrains Mono',monospace;
+    font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);font-weight:600;margin-top:4px;display:block;
+  }
+
+  /* D2C TABLE */
+  .d2c-table{
+    background:#fff;border:1px solid var(--stroke);border-radius:var(--r);
+    overflow:hidden;box-shadow:0 10px 40px -28px rgba(120,90,40,.28);
+    margin-top:26px;
+  }
+  .d2c-table table{width:100%;border-collapse:collapse}
+  .d2c-table thead th{
+    text-align:left;padding:14px 20px;
+    background:linear-gradient(180deg,#fdf8ec,#f9f1dc);
+    border-bottom:1px solid var(--stroke);
+    font-family:'JetBrains Mono',monospace;
+    font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);
+  }
+  .d2c-table tbody tr{border-bottom:1px solid var(--stroke-soft);transition:.2s}
+  .d2c-table tbody tr:last-child{border-bottom:none}
+  .d2c-table tbody tr:hover{background:rgba(245,226,184,.2)}
+  .d2c-table tbody td{
+    padding:16px 20px;font-size:.86rem;color:var(--txt-2);
+    vertical-align:top;line-height:1.55;
+  }
+  .d2c-table .copy-name{font-weight:600;color:var(--txt)}
+  .d2c-table .origin{color:var(--muted);font-style:italic}
+  .d2c-table .result{color:var(--emerald);font-weight:600}
+  .d2c-table .fate{color:var(--rose)}
+  @media(max-width:740px){
+    .d2c-table thead{display:none}
+    .d2c-table tbody tr{display:block;padding:14px 18px;border-bottom:1px solid var(--stroke)}
+    .d2c-table tbody td{display:block;padding:4px 0;border:none}
+    .d2c-table tbody td::before{
+      content:attr(data-label);display:block;
+      font-family:'JetBrains Mono',monospace;font-size:.6rem;
+      letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+      margin-bottom:3px;
+    }
+  }
+
+  /* WHY COPIES WIN */
+  .advantage-flow{
+    display:grid;grid-template-columns:1fr auto 1fr auto 1fr;
+    gap:16px;align-items:stretch;margin:36px 0;
+  }
+  @media(max-width:820px){
+    .advantage-flow{grid-template-columns:1fr;gap:12px}
+    .advantage-flow .arrow{display:none}
+  }
+  .adv-card{
+    background:#fff;border:1px solid var(--stroke);border-radius:var(--r);
+    padding:26px 22px;text-align:center;
+    box-shadow:0 6px 24px -16px rgba(120,90,40,.22);
+  }
+  .adv-card .emoji{font-size:1.8rem;display:block;margin-bottom:10px}
+  .adv-card h4{
+    font-family:'Instrument Serif',serif;font-size:1.15rem;font-weight:400;
+    color:var(--txt);margin-bottom:8px;
+  }
+  .adv-card p{font-size:.83rem;color:var(--txt-2);line-height:1.6}
+  .arrow{
+    display:grid;place-items:center;font-size:1.4rem;color:var(--gold-2);opacity:.6;
+  }
+
+  /* MANIFESTO */
+  .manifesto-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:36px}
+  @media(max-width:820px){.manifesto-grid{grid-template-columns:1fr}}
+  .rule{
+    display:flex;gap:16px;align-items:flex-start;
+    padding:20px 22px;border-radius:14px;
+    background:#fff;border:1px solid var(--stroke);
+    transition:.28s;box-shadow:0 4px 18px -14px rgba(120,90,40,.2);
+  }
+  .rule:hover{transform:translateY(-3px);border-color:var(--stroke-hot);box-shadow:0 14px 32px -22px rgba(201,138,30,.5)}
+  .rule .rn{
+    font-family:'Instrument Serif',serif;font-size:1.7rem;
+    color:var(--gold-2);line-height:1;flex:0 0 auto;padding-top:2px;
+  }
+  .rule h4{
+    font-family:'Inter';font-size:.94rem;font-weight:600;
+    color:var(--txt);margin-bottom:6px;letter-spacing:-.005em;
+  }
+  .rule p{font-size:.85rem;color:var(--txt-2);line-height:1.6}
+
+  /* GRAVEYARD */
+  .graveyard-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+    gap:14px;margin-top:36px;
+  }
+  .tomb{
+    background:linear-gradient(180deg,#fff,#fdfaf3);
+    border:1px solid var(--stroke);border-radius:16px;
+    padding:22px;position:relative;overflow:hidden;
+    transition:.28s;box-shadow:0 6px 22px -18px rgba(120,90,40,.24);
+  }
+  .tomb::before{
+    content:'';position:absolute;top:0;left:20%;right:20%;height:1px;
+    background:linear-gradient(90deg,transparent,var(--rose),transparent);
+    opacity:.5;
+  }
+  .tomb:hover{transform:translateY(-4px);border-color:rgba(201,106,126,.4);box-shadow:0 20px 44px -24px rgba(201,106,126,.4)}
+  .tomb .skull{font-size:1.5rem;margin-bottom:10px;display:block;opacity:.85}
+  .tomb h4{
+    font-family:'Instrument Serif',serif;font-size:1.15rem;font-weight:400;
+    color:var(--txt);margin-bottom:8px;
+  }
+  .tomb p{font-size:.83rem;color:var(--txt-2);line-height:1.6;margin-bottom:12px}
+  .tomb a{
+    font-family:'JetBrains Mono',monospace;font-size:.7rem;
+    color:var(--gold);text-decoration:none;font-weight:600;
+    letter-spacing:.06em;border-bottom:1px solid transparent;transition:.22s;
+  }
+  .tomb a:hover{border-bottom-color:var(--gold)}
+
+  /* VAULT */
+  .vault-controls{
+    display:flex;flex-direction:column;gap:14px;margin-top:32px;margin-bottom:34px;
+  }
+  .search-wrap{position:relative;max-width:540px;width:100%}
+  .search-wrap svg{position:absolute;left:17px;top:50%;transform:translateY(-50%);opacity:.5;color:var(--gold)}
+  #search{
+    width:100%;padding:14px 18px 14px 46px;border-radius:100px;
+    background:#fff;border:1px solid var(--stroke);
+    color:var(--txt);font-family:'Inter';font-size:.92rem;outline:none;transition:.25s;
+    box-shadow:0 4px 14px -10px rgba(120,90,40,.2);
+  }
+  #search::placeholder{color:#b3a48a}
+  #search:focus{border-color:var(--stroke-hot);box-shadow:0 0 0 4px rgba(201,138,30,.12),0 4px 14px -10px rgba(120,90,40,.2)}
+
+  .chips{display:flex;gap:7px;flex-wrap:wrap}
+  .chip{
+    padding:7px 15px;border-radius:100px;cursor:pointer;
+    background:#fff;border:1px solid var(--stroke);
+    color:var(--muted);font-size:.76rem;font-weight:500;
+    transition:.22s;white-space:nowrap;font-family:'Inter';
+    box-shadow:0 2px 8px -6px rgba(120,90,40,.18);
+  }
+  .chip:hover{color:var(--txt);border-color:rgba(201,138,30,.4);background:var(--panel-2)}
+  .chip.active{
+    background:linear-gradient(100deg,var(--gold-2),var(--amber));
+    color:#fff;border-color:transparent;font-weight:600;
+    box-shadow:0 6px 18px -8px rgba(201,138,30,.7);
+  }
+
+  .vault-group{margin-bottom:42px}
+  .vault-group:last-child{margin-bottom:0}
+  .vault-head{
+    display:flex;align-items:center;gap:14px;margin-bottom:14px;
+    padding-bottom:12px;border-bottom:1.5px solid rgba(201,138,30,.18);
+  }
+  .vault-head .icon{
+    width:38px;height:38px;border-radius:11px;flex:0 0 38px;
+    display:grid;place-items:center;font-size:1rem;
+    background:linear-gradient(140deg,rgba(245,226,184,.75),rgba(255,255,255,.5));
+    border:1px solid rgba(201,138,30,.22);
+  }
+  .vault-head h3{
+    font-family:'Instrument Serif',serif;font-size:1.3rem;font-weight:400;
+    letter-spacing:-.015em;color:var(--txt);flex:1;
+  }
+  .vault-head h3 em{color:var(--gold);font-style:italic}
+  .vault-head .count{
+    font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:600;
+    color:var(--amber);padding:4px 11px;border-radius:100px;
+    background:rgba(224,166,58,.15);border:1px solid rgba(201,138,30,.24);
+  }
+
+  .vault-table{
+    background:#fff;border:1px solid var(--stroke);border-radius:var(--r);
+    overflow:hidden;box-shadow:0 6px 24px -18px rgba(120,90,40,.22);
+  }
+  .vault-table table{width:100%;border-collapse:collapse}
+  .vault-table thead th{
+    text-align:left;padding:12px 18px;
+    background:linear-gradient(180deg,#fdf8ec,#f9f1dc);
+    border-bottom:1px solid var(--stroke);
+    font-family:'JetBrains Mono',monospace;
+    font-size:.64rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);white-space:nowrap;
+  }
+  .vault-table tbody tr{
+    border-bottom:1px solid var(--stroke-soft);
+    transition:.2s;cursor:pointer;
+  }
+  .vault-table tbody tr:last-child{border-bottom:none}
+  .vault-table tbody tr:hover{background:linear-gradient(90deg,rgba(245,226,184,.25),rgba(255,255,255,.5))}
+  .vault-table tbody td{padding:14px 18px;vertical-align:top;font-size:.85rem;color:var(--txt-2);line-height:1.55}
+
+  .vn{display:flex;align-items:center;gap:11px}
+  .vn .e{
+    flex:0 0 32px;width:32px;height:32px;border-radius:9px;
+    display:grid;place-items:center;font-size:.92rem;
+    background:linear-gradient(140deg,rgba(245,226,184,.6),rgba(255,255,255,.5));
+    border:1px solid rgba(201,138,30,.2);
+  }
+  .vn .txt .nm{
+    font-weight:600;color:var(--txt);font-size:.88rem;letter-spacing:-.005em;
+  }
+  .vn .txt .h{
+    font-family:'JetBrains Mono',monospace;font-size:.68rem;
+    color:var(--muted);margin-top:2px;
+  }
+  .vtag{
+    display:inline-block;padding:4px 10px;border-radius:100px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    white-space:nowrap;
+  }
+  .vtag.free{background:rgba(22,168,124,.14);color:var(--emerald);border:1px solid rgba(22,168,124,.28)}
+  .vtag.live{background:rgba(216,84,107,.13);color:var(--rose);border:1px solid rgba(216,84,107,.28)}
+  .vtag.gold{background:rgba(224,166,58,.18);color:var(--amber);border:1px solid rgba(201,138,30,.3)}
+
+  .go-btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:30px;height:30px;border-radius:8px;
+    background:linear-gradient(100deg,var(--gold-2),var(--amber));
+    color:#fff;text-decoration:none;font-size:.85rem;font-weight:700;
+    box-shadow:0 4px 10px -5px rgba(201,138,30,.6);
+    transition:.22s;border:none;cursor:pointer;
+  }
+  .go-btn:hover{transform:translateY(-2px) scale(1.06);filter:brightness(1.06)}
+  .go-btn.copied{background:linear-gradient(100deg,var(--mint),var(--emerald))}
+
+  @media(max-width:820px){
+    .vault-table thead th:nth-child(3),
+    .vault-table thead th:nth-child(4),
+    .vault-table tbody td:nth-child(3),
+    .vault-table tbody td:nth-child(4){display:none}
+  }
+
+  /* CREED */
+  .creed{
+    background:linear-gradient(160deg,#fff,rgba(255,251,242,.9));
+    border:1px solid rgba(201,138,30,.22);border-radius:24px;
+    padding:54px 46px;position:relative;overflow:hidden;
+    box-shadow:0 30px 70px -35px rgba(120,90,40,.3);
+    text-align:center;
+  }
+  .creed::before{
+    content:'';position:absolute;top:0;left:15%;right:15%;height:2px;
+    background:linear-gradient(90deg,transparent,var(--gold-2),transparent);opacity:.85;
+  }
+  .creed p{
+    font-family:'Instrument Serif',serif;
+    font-size:clamp(1.05rem,2.4vw,1.4rem);
+    line-height:1.55;color:var(--txt);
+    font-style:italic;margin-bottom:16px;
+  }
+  .creed p em{
+    font-style:italic;
+    background:linear-gradient(100deg,var(--gold),var(--amber));
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .creed .sig{
+    font-family:'JetBrains Mono',monospace;
+    font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--muted);margin-top:24px;
+  }
+
+  /* FOOTER */
+  footer{
+    border-top:1px solid var(--stroke);
+    padding:44px 26px;text-align:center;
+    background:rgba(255,255,255,.5);
+    margin-top:40px;
+  }
+  .foot-q{
+    font-family:'Instrument Serif',serif;font-style:italic;
+    font-size:1.15rem;color:var(--txt);margin-bottom:10px;
+  }
+  .foot-q em{
+    background:linear-gradient(100deg,var(--gold),var(--amber));
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .foot-sub{font-size:.72rem;color:#b0a48d;font-family:'JetBrains Mono',monospace;letter-spacing:.05em}
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar{width:9px;height:9px}
+  ::-webkit-scrollbar-track{background:var(--bg-2)}
+  ::-webkit-scrollbar-thumb{background:rgba(201,138,30,.32);border-radius:100px}
+  ::-webkit-scrollbar-thumb:hover{background:rgba(201,138,30,.55)}
+  ::selection{background:rgba(224,166,58,.35);color:var(--txt)}
+
+  @media(max-width:640px){
+    .hero{padding:60px 20px 40px}
+    section.block{padding:52px 0}
+    .case-head{padding:20px 20px;gap:14px}
+    .case-icon{width:46px;height:46px;flex:0 0 46px;font-size:1.3rem}
+    .case-meta h3{font-size:1.2rem}
+    .case-inner{padding:24px 22px 28px}
+    .creed{padding:36px 24px}
+    .container{padding:0 18px}
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-fx">
+  <div class="glow g1"></div>
+  <div class="glow g2"></div>
+  <div class="glow g3"></div>
+</div>
+<div class="grid-overlay"></div>
+<div class="vignette"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-in">
+    <div class="brand">
+      <div class="mark"></div>
+      <span>IDEA<em>VAULT</em></span>
+    </div>
+    <div class="nav-links">
+      <a href="#playbook">Playbook</a>
+      <a href="#empires">Empires</a>
+      <a href="#manifesto">Manifesto</a>
+      <a href="#vault" class="nav-pill">The Vault ↓</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="badge"><span class="pip"></span> The Copycat Playbook · India Edition</div>
+
+  <h1 class="hero-title">
+    Steal the idea.<br>
+    <span class="shimmer">Build the empire.</span><br>
+    <span class="dead">Stay poor</span> — no.
+  </h1>
+
+  <p class="hero-sub">
+    Every Indian unicorn you admire <strong>started as a copy.</strong>
+    Flipkart copied Amazon. Ola copied Uber. Zomato copied Yelp. Paytm copied Alipay.
+    <mark>None of them invented anything.</mark>
+    They localized, executed, and won. This is the playbook — with proof.
+  </p>
+
+  <div class="hero-cta">
+    <a href="#playbook" class="btn btn-primary">⚡ Read the Playbook</a>
+    <a href="#empires" class="btn btn-ghost">🏆 See the Empires</a>
+    <a href="#vault" class="btn btn-ghost">📚 Open the Vault</a>
+  </div>
+</header>
+
+<!-- PLAYBOOK -->
+<section class="block" id="playbook">
+  <div class="container">
+    <span class="eyebrow">The Method</span>
+    <h2 class="block-title">The <em>4-Step</em> Copycat Playbook</h2>
+    <p class="block-lede">
+      Every empire in this document followed the exact same sequence. There is no step 5.
+      There is no shortcut. This is the entire system, and it has printed billionaires
+      in every decade since 1999.
+    </p>
+
+    <div class="playbook">
+      <div class="step">
+        <div class="num">01</div>
+        <h3>Find a Proven Model</h3>
+        <p>Pick a company that already spent $100M+ proving people want the thing. Amazon. Uber. DoorDash. Alipay. Glossier. The market is validated — you don't need to gamble.</p>
+        <div class="tagline">→ Zero R&amp;D cost</div>
+      </div>
+      <div class="step">
+        <div class="num">02</div>
+        <h3>Localize for India</h3>
+        <p>Cash-on-delivery. Hatchbacks instead of sedans. QR codes on chai stalls. Reformulate for Indian skin. Drop the price 70%. This is where the real innovation happens.</p>
+        <div class="tagline">→ Where the genius lives</div>
+      </div>
+      <div class="step">
+        <div class="num">03</div>
+        <h3>Execute Faster</h3>
+        <p>Ship in 14 days. Charge from day one. Own the supply side before the demand arrives. Speed beats perfection. The original spent 5 years — you spend 5 months.</p>
+        <div class="tagline">→ Speed is the moat</div>
+      </div>
+      <div class="step">
+        <div class="num">04</div>
+        <h3>Build the Empire</h3>
+        <p>Once you own the localization, expand. Add payments. Add logistics. Add insurance. Flipkart went from books to $16B. Paytm went from wallet to super-app.</p>
+        <div class="tagline">→ Compound the win</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMPIRES -->
+<section class="block" id="empires" style="background:linear-gradient(180deg,transparent,rgba(245,226,184,.2),transparent)">
+  <div class="container">
+    <span class="eyebrow">The Proof</span>
+    <h2 class="block-title">Nine Empires That <em>Started as Copies</em></h2>
+    <p class="block-lede">
+      These founders didn't invent anything. They saw a proven model, rebuilt it for India,
+      and now sit on billions. Click any card to read the full story — the copy, the
+      localization genius, and the resulting empire.
+    </p>
+
+    <div class="cases">
+
+      <!-- CASE 1: FLIPKART -->
+      <article class="case">
+        <div class="case-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="case-icon">📚</div>
+          <div class="case-meta">
+            <h3>Flipkart — <em>the Amazon of India</em></h3>
+            <div class="sub">Copied <strong>Amazon</strong> · Bengaluru, 2007 · Exited for <strong>$16B</strong></div>
+          </div>
+          <div class="case-expand">+</div>
+        </div>
+        <div class="case-body">
+          <div class="case-inner">
+            <div class="case-cols">
+              <div class="case-col">
+                <h4>The Copy</h4>
+                <p>Sachin and Binny Bansal quit their jobs at Amazon India in 2007 and launched Flipkart as an online bookstore — a direct playbook copy of Amazon.com. They'd seen the playbook from the inside and wanted to <strong>recreate the US giant's success in India.</strong></p>
+                <p>The premise was simple: if Amazon can move from books to everything in America, the same model can work in India — with the same playbook but a different map.</p>
+              </div>
+              <div class="case-col">
+                <h4>The Localization</h4>
+                <p>Amazon had it easy. In America, everyone had <strong>credit cards and UPS trucks</strong> on every road. Flipkart had neither. So they rebuilt the entire infrastructure from scratch:</p>
+                <ul class="case-list">
+                  <li><strong>Cash-on-Delivery</strong> — revolutionary in a low-card-penetration country</li>
+                  <li><strong>Ekart logistics</strong> — built from zero in a country with bad roads</li>
+                  <li><strong>Consumer trust</strong> — convinced skeptics to pay online for the first time</li>
+                </ul>
+              </div>
+            </div>
+            <div class="case-verdict">
+              <strong>The Verdict:</strong> Amazon built e-commerce for America. Flipkart rebuilt it for India — with new payments, new logistics, new trust. That's not a copy. That's an empire built on a copied blueprint.
+            </div>
+            <div class="case-metrics">
+              <div class="metric"><b>$16B</b><span>Walmart Exit · 2018</span></div>
+              <div class="metric"><b>$37.6B</b><span>Peak Valuation</span></div>
+              <div class="metric"><b>2007</b><span>Founded · Bengaluru</span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- CASE 2: OLA -->
+      <article class="case">
+        <div class="case-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="case-icon">🚗</div>
+          <div class="case-meta">
+            <h3>Ola — <em>the Uber of India</em></h3>
+            <div class="sub">Copied <strong>Uber</strong> · Mumbai, 2010 · Beat Uber in its own market</div>
+          </div>
+          <div class="case-expand">+</div>
+        </div>
+        <div class="case-body">
+          <div class="case-inner">
+            <div class="case-cols">
+              <div class="case-col">
+                <h4>The Copy</h4>
+                <p>Bhavish Aggarwal and Ankit Bhati launched Ola as a straight-up copy of Uber's two-sided marketplace model — app-based hailing, cashless payments, driver-partner supply. The playbook was identical.</p>
+                <p>The only question was: could a local copy beat the original in its own backyard?</p>
+              </div>
+              <div class="case-col">
+                <h4>The Localization</h4>
+                <p>Uber entered India with premium sedans at premium prices. Ola did the exact opposite — and it worked:</p>
+                <ul class="case-list">
+                  <li><strong>Smaller hatchbacks</strong> — the exact vehicles Indians already drove. Instant hit with customers AND brought vastly more drivers online.</li>
+                  <li><strong>Auto-rickshaw pricing</strong> — priced at ₹ per km, not luxury car rates.</li>
+                  <li><strong>Driver incentives</strong> — aggressive payouts to lock in supply before demand arrived.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="case-verdict">
+              <strong>The Verdict:</strong> Uber arrived in India with American assumptions. Ola read the Indian street. The copycat didn't just survive — it captured ~80% of the market.
+            </div>
+            <div class="case-metrics">
+              <div class="metric"><b>~80%</b><span>India Market Share</span></div>
+              <div class="metric"><b>$1.9B</b><span>Peak Valuation</span></div>
+              <div class="metric"><b>3</b><span>Countries Expanded</span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- CASE 3: ZOMATO & SWIGGY -->
+      <article class="case">
+        <div class="case-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="case-icon">🍕</div>
+          <div class="case-meta">
+            <h3>Zomato &amp; Swiggy — <em>Yelp + DoorDash of India</em></h3>
+            <div class="sub">Copied <strong>Yelp + DoorDash</strong> · 2008 &amp; 2014 · $17B+ combined</div>
+          </div>
+          <div class="case-expand">+</div>
+        </div>
+        <div class="case-body">
+          <div class="case-inner">
+            <div class="case-cols">
+              <div class="case-col">
+                <h4>The Copy</h4>
+                <p><strong>Zomato</strong> launched in 2008 as Foodiebay — an online platform for restaurant discovery and user reviews, akin to <strong>Yelp.com</strong>. It was literally a website for digitizing menus because office workers were hoarding paper leaflets of nearby restaurants.</p>
+                <p><strong>Swiggy</strong> followed in 2014, copying <strong>DoorDash's</strong> full-logistics model — connecting restaurants with customers using gig-economy delivery drivers.</p>
+              </div>
+              <div class="case-col">
+                <h4>The Localization</h4>
+                <p>Zomato started as Yelp but transformed into DoorDash — retracing its steps multiple times to fit India's unique foodtech space. Swiggy went deeper on logistics, owning the entire delivery stack when restaurants couldn't be trusted to be fast enough.</p>
+                <p>Both adapted to India's <strong>fragmented restaurant market</strong> — from 5-star hotels to street-side dhabas, all on the same app.</p>
+              </div>
+            </div>
+            <div class="case-verdict">
+              <strong>The Verdict:</strong> Yelp faded because it stayed a review site. Zomato evolved into delivery, then quick-commerce. Adaptation beats imitation — every time.
+            </div>
+            <div class="case-metrics">
+              <div class="metric"><b>$17B</b><span>Zomato Value</span></div>
+              <div class="metric"><b>2024</b><span>Swiggy IPO</span></div>
+              <div class="metric"><b>2</b><span>Empires From 1 Playbook</span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- CASE 4: PAYTM -->
+      <article class="case">
+        <div class="case-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="case-icon">💳</div>
+          <div class="case-meta">
+            <h3>Paytm — <em>India's Alipay</em></h3>
+            <div class="sub">Copied <strong>Alipay</strong> · Noida, 2010 · $900M from Ant Financial</div>
+          </div>
+          <div class="case-expand">+</div>
+        </div>
+        <div class="case-body">
+          <div class="case-inner">
+            <div class="case-cols">
+              <div class="case-col">
+                <h4>The Copy</h4>
+                <p>Paytm is <strong>literally called "India's Alipay."</strong> Founder Vijay Shekhar Sharma copied the Alipay business model to India with help from Ant Financial — Alibaba's subsidiary and the owner of Alipay, one of the most popular mobile wallets in China.</p>
+                <p>Ant invested <strong>$900 million</strong> into Paytm — twice. With the money came the playbook: Alipay's success experience in China, the QR-code payment system, the merchant acquisition strategy.</p>
+              </div>
+              <div class="case-col">
+                <h4>The Localization</h4>
+                <ul class="case-list">
+                  <li><strong>QR codes everywhere</strong> — India's street vendors couldn't afford POS machines. Paytm put QR codes on every chai stall, auto-rickshaw, and kirana store.</li>
+                  <li><strong>KYC-light onboarding</strong> — India's paperwork was brutal. Paytm simplified it.</li>
+                  <li><strong>UPI integration</strong> — when India built its own rails, Paytm rode the wave instead of fighting it.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="case-verdict">
+              <strong>The Verdict:</strong> Alipay solved payments for China. Paytm solved payments for India. Same playbook. Different country. Different problems.
+            </div>
+            <div class="case-metrics">
+              <div class="metric"><b>23M → 250M</b><span>User Growth</span></div>
+              <div class="metric"><b>$900M</b><span>Ant Investment</span></div>
+              <div class="metric"><b>2021</b><span>India's Largest Fintech IPO</span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- CASE 5: MINIMALIST -->
+      <article class="case">
+        <div class="case-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="case-icon">🧴</div>
+          <div class="case-meta">
+            <h3>Minimalist — <em>The Ordinary of India</em></h3>
+            <div class="sub">Copied <strong>The Ordinary</strong> · 2020 · Acquired by HUL for <strong>₹2,955 Cr</strong></div>
+          </div>
+          <div class="case-expand">+</div>
+        </div>
+        <div class="case-body">
+          <div class="case-inner">
+            <div class="case-cols">
+              <div class="case-col">
+                <h4>The Copy</h4>
+                <p>Minimalist took <strong>The Ordinary's</strong> entire philosophy — ingredient-first skincare, transparent labels, no fancy packaging, actives-led formulations — and rebuilt it for India at ⅓ the price.</p>
+                <p>Even the category was a copy: The Ordinary invented "actives-led skincare at mass price points." Minimalist brought it to India.</p>
+              </div>
+              <div class="case-col">
+                <h4>The Localization</h4>
+                <ul class="case-list">
+                  <li><strong>Manufactured in India</strong> — avoided import duties that made The Ordinary unaffordable</li>
+                  <li><strong>Priced ₹300–700</strong> — reachable for the Indian middle class, vs ₹1,500+ for imported Ordinary</li>
+                  <li><strong>Reformulated for Indian skin</strong> — pigmentation, tan, humidity-specific actives</li>
+                </ul>
+              </div>
+            </div>
+            <div class="case-verdict">
+              <strong>The Verdict:</strong> The Ordinary was affordable globally — but after import duties, it wasn't affordable in India. Minimalist localized the exact same philosophy and turned it into a ₹2,955 Cr exit in under 5 years.
+            </div>
+            <div class="case-metrics">
+              <div class="metric"><b>₹347 Cr</b><span>FY24 Revenue</span></div>
+              <div class="metric"><b>₹2,955 Cr</b><span>HUL Acquisition</span></div>
+              <div class="metric"><b>&lt; 5 yrs</b><span>Idea → Exit</span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- CASE 6: BOAT -->
+      <article class="case">
+        <div class="case-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="case-icon">🎧</div>
+          <div class="case-meta">
+            <h3>boAt — <em>Beats by Dre, for India</em></h3>
+            <div class="sub">Copied <strong>Beats</strong> · Delhi, 2016 · ₹3,100 Cr revenue, pre-IPO</div>
+          </div>
+          <div class="case-expand">+</div>
+        </div>
+        <div class="case-body">
+          <div class="case-inner">
+            <div class="case-cols">
+              <div class="case-col">
+                <h4>The Copy</h4>
+                <p>boAt copied Beats' entire positioning — <strong>lifestyle audio brand</strong>, celebrity collaborations, vibrant design, aspirational marketing. Beats had built a $3B franchise proving young people would pay a premium for headphones that felt like fashion.</p>
+                <p>Aman Gupta and Sameer Mehta saw that playbook and asked: what if we do this in India at ₹500?</p>
+              </div>
+              <div class="case-col">
+                <h4>The Localization</h4>
+                <ul class="case-list">
+                  <li><strong>Price drop 80%</strong> — Beats at $200 became boAt at ₹999</li>
+                  <li><strong>Mass-market distribution</strong> — Flipkart, Amazon, 5,000+ offline stores</li>
+                  <li><strong>India-first designs</strong> — bright colors, Bollywood athlete collabs, "plug into nirvana"</li>
+                </ul>
+              </div>
+            </div>
+            <div class="case-verdict">
+              <strong>The Verdict:</strong> Beats made headphones a fashion item for America. boAt made the same move for India — and became the #1 audio brand in the country before ever going public.
+            </div>
+            <div class="case-metrics">
+              <div class="metric"><b>₹3,100 Cr</b><span>Annual Revenue</span></div>
+              <div class="metric"><b>Profitable</b><span>Before IPO</span></div>
+              <div class="metric"><b>#1</b><span>India Audio Brand</span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- CASE 7: LENSKART -->
+      <article class="case">
+        <div class="case-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="case-icon">👓</div>
+          <div class="case-meta">
+            <h3>Lenskart — <em>Warby Parker of India</em></h3>
+            <div class="sub">Copied <strong>Warby Parker</strong> · 2010 · 2,000+ stores, ₹5,500 Cr+</div>
+          </div>
+          <div class="case-expand">+</div>
+        </div>
+        <div class="case-body">
+          <div class="case-inner">
+            <div class="case-cols">
+              <div class="case-col">
+                <h4>The Copy</h4>
+                <p>Peyush Bansal copied Warby Parker's entire playbook — <strong>designer eyewear at a fraction of traditional prices</strong>, direct-to-consumer model, in-house design. Warby Parker had already proven the model in the US.</p>
+              </div>
+              <div class="case-col">
+                <h4>The Localization</h4>
+                <p>Warby Parker stayed mostly online. Lenskart did the opposite — it went hard into physical retail:</p>
+                <ul class="case-list">
+                  <li><strong>2,000+ physical stores</strong> — because 85% of Indian shopping still happens offline</li>
+                  <li><strong>Free eye tests</strong> — Indians won't buy glasses without trying them on</li>
+                  <li><strong>Home try-on + store try-on</strong> — hybrid model that matched Indian habits</li>
+                </ul>
+              </div>
+            </div>
+            <div class="case-verdict">
+              <strong>The Verdict:</strong> Warby Parker IPO'd and its stock fell 80%. Lenskart built 2,000 physical stores and kept growing. Understanding Indian consumer habits — not copying the American strategy — is what won.
+            </div>
+            <div class="case-metrics">
+              <div class="metric"><b>₹5,500 Cr+</b><span>Revenue</span></div>
+              <div class="metric"><b>2,000+</b><span>Physical Stores</span></div>
+              <div class="metric"><b>India + SEA</b><span>Present In</span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- CASE 8: SUGAR -->
+      <article class="case">
+        <div class="case-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="case-icon">💄</div>
+          <div class="case-meta">
+            <h3>Sugar Cosmetics — <em>Glossier of India</em></h3>
+            <div class="sub">Copied <strong>Glossier</strong> · 2015 · ₹505 Cr, 45,000 retail outlets</div>
+          </div>
+          <div class="case-expand">+</div>
+        </div>
+        <div class="case-body">
+          <div class="case-inner">
+            <div class="case-cols">
+              <div class="case-col">
+                <h4>The Copy</h4>
+                <p>Vineeta Singh and Kaushik Mukherjee copied Glossier's <strong>community-first, millennial-focused beauty brand</strong> playbook — content-led marketing, cute packaging, Instagram-native growth, first-person voice.</p>
+              </div>
+              <div class="case-col">
+                <h4>The Localization</h4>
+                <ul class="case-list">
+                  <li><strong>Built for Indian skin tones</strong> — Glossier focused on light coverage and dewy finish; Sugar went bolder and stronger</li>
+                  <li><strong>Tier 2 &amp; 3 distribution</strong> — 45,000 retail outlets, not just online</li>
+                  <li><strong>Long-wear formulas</strong> — tested for Indian weather, humidity, and daily wear</li>
+                </ul>
+              </div>
+            </div>
+            <div class="case-verdict">
+              <strong>The Verdict:</strong> Glossier laid off staff and pulled out of retail. Sugar built 45,000 physical outlets and crossed ₹500 Cr. Copying the idea is step one — adapting it to the customer is where the money is.
+            </div>
+            <div class="case-metrics">
+              <div class="metric"><b>₹505 Cr</b><span>Revenue</span></div>
+              <div class="metric"><b>45,000</b><span>Retail Outlets</span></div>
+              <div class="metric"><b>2015</b><span>Founded</span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- CASE 9: WAKEIFT -->
+      <article class="case">
+        <div class="case-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="case-icon">🛏️</div>
+          <div class="case-meta">
+            <h3>Wakefit — <em>Casper of India</em></h3>
+            <div class="sub">Copied <strong>Casper</strong> · 2016 · Profitable, D2C mattress leader</div>
+          </div>
+          <div class="case-expand">+</div>
+        </div>
+        <div class="case-body">
+          <div class="case-inner">
+            <div class="case-cols">
+              <div class="case-col">
+                <h4>The Copy</h4>
+                <p>Wakefit copied Casper's <strong>D2C mattress playbook</strong> — no showroom overhead, 100-night trial, direct shipping, influencer-led marketing. Casper had already proven that people would buy a mattress without lying on it first.</p>
+              </div>
+              <div class="case-col">
+                <h4>The Localization</h4>
+                <ul class="case-list">
+                  <li><strong>Priced for India</strong> — ₹6,000 vs Casper's $1,000+</li>
+                  <li><strong>Different sizes</strong> — Indian bed dimensions, not American queen/king</li>
+                  <li><strong>Longer trial</strong> — 100 nights, because Indian buyers are more skeptical</li>
+                </ul>
+              </div>
+            </div>
+            <div class="case-verdict">
+              <strong>The Verdict:</strong> Casper went public, collapsed, and was taken private. Wakefit stayed lean, stayed profitable, and became the #1 D2C mattress brand in India. Focus on unit economics — not copying the growth-at-all-costs model.
+            </div>
+            <div class="case-metrics">
+              <div class="metric"><b>Profitable</b><span>From Early On</span></div>
+              <div class="metric"><b>#1</b><span>India D2C Mattress</span></div>
+              <div class="metric"><b>₹6K</b><span>Entry Price Point</span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- D2C SUMMARY TABLE -->
+    <div class="d2c-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Indian Copy</th>
+            <th>Copied From</th>
+            <th>Indian Result</th>
+            <th>Original's Fate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Indian Copy"><span class="copy-name">Minimalist</span></td>
+            <td data-label="Copied From"><span class="origin">The Ordinary</span></td>
+            <td data-label="Indian Result"><span class="result">₹2,955 Cr HUL exit</span></td>
+            <td data-label="Original's Fate"><span class="fate">Acquired by Estée Lauder</span></td>
+          </tr>
+          <tr>
+            <td data-label="Indian Copy"><span class="copy-name">boAt</span></td>
+            <td data-label="Copied From"><span class="origin">Beats by Dre</span></td>
+            <td data-label="Indian Result"><span class="result">₹3,100 Cr revenue</span></td>
+            <td data-label="Original's Fate"><span class="fate">Sold to Apple for $3B</span></td>
+          </tr>
+          <tr>
+            <td data-label="Indian Copy"><span class="copy-name">Lenskart</span></td>
+            <td data-label="Copied From"><span class="origin">Warby Parker</span></td>
+            <td data-label="Indian Result"><span class="result">₹5,500 Cr+, 2,000 stores</span></td>
+            <td data-label="Original's Fate"><span class="fate">Stock crashed 80% post-IPO</span></td>
+          </tr>
+          <tr>
+            <td data-label="Indian Copy"><span class="copy-name">Sugar Cosmetics</span></td>
+            <td data-label="Copied From"><span class="origin">Glossier</span></td>
+            <td data-label="Indian Result"><span class="result">₹505 Cr, 45,000 outlets</span></td>
+            <td data-label="Original's Fate"><span class="fate">Laid off staff, retail exit</span></td>
+          </tr>
+          <tr>
+            <td data-label="Indian Copy"><span class="copy-name">Wakefit</span></td>
+            <td data-label="Copied From"><span class="origin">Casper</span></td>
+            <td data-label="Indian Result"><span class="result">Profitable, market leader</span></td>
+            <td data-label="Original's Fate"><span class="fate">Went public, collapsed</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- WHY COPIES WIN -->
+<section class="block">
+  <div class="container">
+    <span class="eyebrow">The Structural Advantage</span>
+    <h2 class="block-title">Why the Copies <em>Keep Winning</em></h2>
+    <p class="block-lede">
+      This isn't luck. It's a structural arbitrage that exists in every emerging market.
+      The American original spends years and millions proving the model. The Indian copy
+      spends zero on validation and pours everything into <strong>localization and execution.</strong>
+    </p>
+
+    <div class="advantage-flow">
+      <div class="adv-card">
+        <span class="emoji">🎯</span>
+        <h4>Validated Demand</h4>
+        <p>The US company already spent $100M+ proving people want this. You don't gamble.</p>
+      </div>
+      <div class="arrow">→</div>
+      <div class="adv-card">
+        <span class="emoji">⚙️</span>
+        <h4>Zero R&amp;D Cost</h4>
+        <p>No need to invent the model. It's already proven. Just copy the structure and ship.</p>
+      </div>
+      <div class="arrow">→</div>
+      <div class="adv-card">
+        <span class="emoji">🇮🇳</span>
+        <h4>Local Advantage</h4>
+        <p>You understand the Indian customer better than a Silicon Valley team ever will.</p>
+      </div>
+    </div>
+
+    <p class="block-lede" style="margin-bottom:0">
+      In India, "copying" is not a dirty word — it's a <strong>business strategy.</strong> People
+      often dismiss Indian startups by saying "they just copied," but that's the laziest take
+      in startup commentary. Building in India requires building three infrastructures from
+      scratch simultaneously, because India didn't have what America had when Amazon started.
+      <strong>That's not copying. That's innovation born of necessity.</strong>
+    </p>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="block" id="manifesto" style="background:linear-gradient(180deg,transparent,rgba(245,226,184,.22),transparent)">
+  <div class="container">
+    <span class="eyebrow">The Rules</span>
+    <h2 class="block-title">The Seven <em>Operator's Rules</em></h2>
+    <p class="block-lede">
+      Print these. Stick them on your wall. Read them before every decision.
+      These are the rules that every empire in this document followed — consciously or not.
+    </p>
+
+    <div class="manifesto-grid">
+      <div class="rule">
+        <div class="rn">01</div>
+        <div>
+          <h4>Mine pain, not praise.</h4>
+          <p>Complaints on Reddit, G2, Trustpilot are your roadmap. Find what people hate and fix it for money.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <div class="rn">02</div>
+        <div>
+          <h4>Find the legacy tool.</h4>
+          <p>If a boring tool has 10K reviews and no AI layer, build the AI layer. That's your whole product.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <div class="rn">03</div>
+        <div>
+          <h4>Study the graveyard.</h4>
+          <p>Read post-mortems before you build. 90% of startup failures are copy-paste mistakes you can avoid.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <div class="rn">04</div>
+        <div>
+          <h4>Copy the structure, not the branding.</h4>
+          <p>Nobody owns a business model. Amazon doesn't own e-commerce. Uber doesn't own ride-hailing.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <div class="rn">05</div>
+        <div>
+          <h4>Ship in 14 days.</h4>
+          <p>A launched MVP beats a perfect pitch deck every single time. Speed is the only moat that compounds.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <div class="rn">06</div>
+        <div>
+          <h4>Charge from day one.</h4>
+          <p>Free users teach you nothing. Paying users teach you everything. If nobody pays, you have a hobby, not a business.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <div class="rn">07</div>
+        <div>
+          <h4>Feed the machine daily.</h4>
+          <p>15 minutes in these sources every morning = infinite idea pipeline. Compounding applies to information too.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GRAVEYARD -->
+<section class="block">
+  <div class="container">
+    <span class="eyebrow">The Graveyard</span>
+    <h2 class="block-title">Study the Dead — <em>Before You Join Them</em></h2>
+    <p class="block-lede">
+      Every successful founder reads post-mortems. Not because it's fun — because it's
+      free tuition. The 1,700+ Y Combinator failures on record have already paid the price
+      for the lessons you're about to learn.
+    </p>
+
+    <div class="graveyard-grid">
+      <div class="tomb">
+        <span class="skull">💀</span>
+        <h4>Startups.rip</h4>
+        <p>1,700+ Y Combinator startup post-mortems. What they built, why they died, and what every builder should learn.</p>
+        <a href="https://startups.rip/" target="_blank" rel="noopener">Visit →</a>
+      </div>
+      <div class="tomb">
+        <span class="skull">⚰️</span>
+        <h4>Loot Drop</h4>
+        <p>The "startup graveyard". 900+ funded startups with detailed post-mortems and failure analysis.</p>
+        <a href="https://www.loot-drop.io/" target="_blank" rel="noopener">Visit →</a>
+      </div>
+      <div class="tomb">
+        <span class="skull">🥀</span>
+        <h4>Failory</h4>
+        <p>Case studies &amp; interviews with failed founders. Learn what NOT to do before you build anything.</p>
+        <a href="https://www.failory.com/" target="_blank" rel="noopener">Visit →</a>
+      </div>
+      <div class="tomb">
+        <span class="skull">📉</span>
+        <h4>CB Insights</h4>
+        <p>Analysis of 110+ startup post-mortems revealing the Top 12 reasons startups fail.</p>
+        <a href="https://www.cbinsights.com/research/startup-failure-post-mortem/" target="_blank" rel="noopener">Visit →</a>
+      </div>
+      <div class="tomb">
+        <span class="skull">🪦</span>
+        <h4>Deadstack</h4>
+        <p>Curated archive of real startup post-mortems. Study the dead so you don't join them.</p>
+        <a href="https://deadstack.co/" target="_blank" rel="noopener">Visit →</a>
+      </div>
+      <div class="tomb">
+        <span class="skull">🌒</span>
+        <h4>Nakamology</h4>
+        <p>Open-source, crowd-sourced list of failed startups with founder-written post-mortems.</p>
+        <a href="https://nakamology.com/" target="_blank" rel="noopener">Visit →</a>
+      </div>
+      <div class="tomb">
+        <span class="skull">🕯️</span>
+        <h4>Startup Graveyard</h4>
+        <p>Detailed post-mortems and "obituaries" for failed startups. Every tombstone teaches.</p>
+        <a href="https://www.startupgraveyard.co/" target="_blank" rel="noopener">Visit →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VAULT -->
+<section class="block" id="vault" style="background:linear-gradient(180deg,transparent,rgba(245,226,184,.22),transparent)">
+  <div class="container">
+    <span class="eyebrow">The Sources</span>
+    <h2 class="block-title">The Vault — <em>77+ Live Sources</em></h2>
+    <p class="block-lede">
+      Every place on the internet where startup and AI ideas live in public.
+      Search, filter, and copy any link. Updated for 2025.
+    </p>
+
+    <div class="vault-controls">
+      <div class="search-wrap">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
+        </svg>
+        <input id="search" type="text" placeholder="Search 77+ sources… (reddit, saas, ai, postmortem)" autocomplete="off" />
+      </div>
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <div id="vaultGrid"></div>
+  </div>
+</section>
+
+<!-- CREED -->
+<section class="block">
+  <div class="container">
+    <div class="creed">
+      <p>
+        "An idea is worth <em>nothing</em>. Execution is worth <em>everything</em>.<br>
+        So stop hunting for originality — start hunting for <em>proven demand</em>,
+        and out-build the person who found it first."
+      </p>
+      <p style="font-size:.9rem;opacity:.75;font-family:'Inter';font-style:normal;">
+        Flipkart didn't invent e-commerce. It built it for India.<br>
+        Ola didn't invent ride-hailing. It built it for India.<br>
+        Zomato didn't invent food delivery. It built it for India.<br>
+        Paytm didn't invent digital payments. It built it for India.<br>
+        Every single one of them is worth crores today.
+      </p>
+      <p style="font-family:'Instrument Serif',serif;font-size:1.15rem;font-style:italic;">
+        The playbook is public. The sources are in this vault.<br>
+        The only variable left is <em>you</em>.
+      </p>
+      <div class="sig">— The Operator's Creed</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-q">Copy. Build. Ship. Repeat. — until poverty is a <em>memory</em>.</div>
+  <div class="foot-sub">IDEA VAULT · A directory of public idea sources · All links belong to their respective owners</div>
+</footer>
+
+<script>
+/* ============================================================
+   DATA — 77+ sources
+   ============================================================ */
+const DATA = [
+  /* FEEDS */
+  {c:"feeds", e:"📡", n:"TechCrunch — AI", u:"https://techcrunch.com/category/artificial-intelligence/", d:"Daily AI startup news, funding rounds and product launches. Your morning pipeline.", t:"live"},
+  {c:"feeds", e:"🟠", n:"Hacker News", u:"https://news.ycombinator.com/", d:"Constant stream of tech & startup news. 'Show HN' posts are literally free ideas.", t:"live"},
+  {c:"feeds", e:"🐱", n:"Product Hunt — AI", u:"https://www.producthunt.com/topics/artificial-intelligence", d:"Every new AI product launched today. See what's working before it saturates.", t:"live"},
+  {c:"feeds", e:"📄", n:"arXiv — CS.AI Recent", u:"https://arxiv.org/list/cs.AI/recent", d:"Latest AI research papers. 6–18 month lead on what becomes a product.", t:"free"},
+  {c:"feeds", e:"🧠", n:"arXiv — CS.LG Recent", u:"https://arxiv.org/list/cs.LG/recent", d:"Machine learning papers. Where the next generation of tools is born.", t:"free"},
+  {c:"feeds", e:"📊", n:"Papers With Code", u:"https://paperswithcode.co/", d:"ML papers with working implementations. Research → product in one click.", t:"free"},
+  {c:"feeds", e:"⭐", n:"GitHub Trending", u:"https://github.com/trending", d:"What developers are starring right now. Build the commercial layer on top.", t:"live"},
+  {c:"feeds", e:"👨‍💻", n:"Indie Hackers", u:"https://indiehackers.com/", d:"Founder interviews + revenue numbers. Real people, real money, copyable models.", t:"gold"},
+  {c:"feeds", e:"🗞️", n:"Techmeme", u:"https://techmeme.com/", d:"The tech news aggregator. One page, whole industry.", t:"free"},
+  {c:"feeds", e:"🔬", n:"ArXiv Sanity", u:"http://www.arxiv-sanity.com/", d:"Curated ML paper trends — cuts the noise from thousands of papers.", t:"free"},
+
+  /* DB */
+  {c:"db", e:"💡", n:"Freeideas.net", u:"https://freeideas.net/", d:"100s of free business ideas, organised. Zero cost to browse, zero excuse not to start.", t:"free"},
+  {c:"db", e:"🛒", n:"SideProjectors", u:"https://www.sideprojectors.com/", d:"Marketplace of side projects + curated business ideas & founder stories.", t:"free"},
+  {c:"db", e:"🚀", n:"ShipBoost (Pannly)", u:"https://shipboost.io/", d:"Curated archive of ideas people publicly said they'd pay for.", t:"free"},
+  {c:"db", e:"📈", n:"IndieSignal", u:"https://indiesignal.app/", d:"Real problems people complain about online, researched into buildable opportunities.", t:"gold"},
+  {c:"db", e:"🧩", n:"Startup-Ideas.tech", u:"https://startup-ideas.tech/", d:"Curated collection reverse-engineered from real product launches.", t:"free"},
+  {c:"db", e:"🔎", n:"Problem Sight", u:"https://www.producthunt.com/", d:"Community-curated database of problems worth solving.", t:"free"},
+  {c:"db", e:"📮", n:"Ideater (PeerPush)", u:"https://peerpush.com/", d:"Daily curated feed of new startup opportunities.", t:"free"},
+  {c:"db", e:"✍️", n:"Creyater", u:"https://www.producthunt.com/", d:"Discover and share startup ideas across the full idea → MVP → launched journey.", t:"free"},
+  {c:"db", e:"⚙️", n:"Founderz.tech", u:"https://www.producthunt.com/", d:"Validated concepts + real-time tech and startup trend signals.", t:"free"},
+  {c:"db", e:"🌀", n:"Unthinkable", u:"https://apps.apple.com/", d:"Reads real demand signals from across the web and surfaces them to you.", t:"free"},
+  {c:"db", e:"📱", n:"StartUp Ideas — 1000+", u:"https://play.google.com/store", d:"1000+ ideas with business plans and lean canvases. Offline idea bank.", t:"free"},
+
+  /* AI */
+  {c:"ai", e:"🤖", n:"Stratup.ai", u:"https://stratup.ai/", d:"100,000+ ready-made AI startup concepts. The single biggest idea dump online.", t:"gold"},
+  {c:"ai", e:"🧬", n:"Startup Ideas AI", u:"https://startupideasai.com/", d:"~140,000 AI-generated startup ideas, filterable by industry. Absurd volume.", t:"gold"},
+  {c:"ai", e:"🏭", n:"IdeaFoundry.wiki", u:"https://www.producthunt.com/", d:"Validated AI opportunities mined from Reddit, GitHub and G2 signals.", t:"gold"},
+  {c:"ai", e:"🔁", n:"Reforgify", u:"https://toolsfine.com/", d:"25K VC-backed startups, 11K ideas, AI suggestions and gap analysis.", t:"free"},
+  {c:"ai", e:"♾️", n:"IdeaLoop", u:"https://www.producthunt.com/", d:"Multi-agent AI that scans the web daily for fresh, unclaimed ideas.", t:"gold"},
+  {c:"ai", e:"🗳️", n:"Koncept AI (SaaSCity)", u:"https://saascity.io/", d:"AI-researched startup ideas a community votes on. Built-in validation.", t:"free"},
+  {c:"ai", e:"💎", n:"VentureVault", u:"https://theresanaiforthat.com/", d:"AI-powered market analysis for validated ideas. Know the market before you build.", t:"free"},
+  {c:"ai", e:"📝", n:"Ideanote", u:"https://ideanote.io/", d:"AI-powered suggestion engine + idea management for teams and solo builders.", t:"free"},
+  {c:"ai", e:"🌐", n:"Mixo.io", u:"https://www.mixo.io/", d:"Instantly generate an idea AND a one-page website to test it. Idea → live in minutes.", t:"gold"},
+  {c:"ai", e:"🔭", n:"Ideabrowser.com", u:"https://ideabrowser.com/", d:"Validated ideas pulled from Facebook groups, subreddits and Google Trends.", t:"gold"},
+
+  /* NEWS */
+  {c:"news", e:"🎓", n:"Y Combinator", u:"https://www.ycombinator.com/", d:"Founder resources, Startup School, Request for Startups, global case studies.", t:"gold"},
+  {c:"news", e:"🐱", n:"Product Hunt", u:"https://www.producthunt.com/", d:"Community-driven discovery of every new tech product. Daily launch firehose.", t:"live"},
+  {c:"news", e:"📰", n:"VentureBeat", u:"https://venturebeat.com/", d:"Global startup trends, funding rounds and enterprise AI coverage.", t:"live"},
+  {c:"news", e:"📊", n:"Crunchbase", u:"https://www.crunchbase.com/", d:"Track new projects, funding rounds and overall market mood by sector.", t:"free"},
+  {c:"news", e:"🚪", n:"Betalist", u:"https://betalist.com/", d:"Discover new startups before they launch. Get in early, see the pattern.", t:"free"},
+  {c:"news", e:"🌱", n:"Startups.fyi", u:"https://startups.fyi/", d:"MVP project database — see what tiny teams are shipping right now.", t:"free"},
+  {c:"news", e:"⚡", n:"RuntimeWire", u:"https://runtimewire.com/", d:"Breaking startup & AI news and launches, as they happen.", t:"live"},
+  {c:"news", e:"🗄️", n:"BusinessNewsWire.org", u:"https://businessnewswire.org/", d:"Startups, investments and entrepreneurial intelligence in one place.", t:"free"},
+  {c:"news", e:"🌍", n:"StartupXO (MrLatte)", u:"https://www.mrlatte.net/", d:"Multilingual startup news + ideas + builder community.", t:"free"},
+  {c:"news", e:"🇮🇳", n:"Entrepreneur Outreach", u:"https://medium.com/", d:"India-focused business news for entrepreneurs. Local = less competition.", t:"free"},
+  {c:"news", e:"🇩🇪", n:"Munich Startup", u:"https://www.munich-startup.de/", d:"Personalised entry point into the European startup ecosystem.", t:"free"},
+
+  /* GAP */
+  {c:"gap", e:"🅶", n:"G2", u:"https://www.g2.com/", d:"Find top-rated legacy tools WITHOUT AI — then build the AI layer on top. Goldmine.", t:"gold"},
+  {c:"gap", e:"📋", n:"Capterra", u:"https://www.capterra.com/", d:"Real user reviews revealing exactly where existing software fails.", t:"gold"},
+  {c:"gap", e:"🤝", n:"Clutch", u:"https://clutch.co/", d:"Raw agency & software stories. Every complaint is a product waiting to exist.", t:"free"},
+  {c:"gap", e:"⭐", n:"Trustpilot", u:"https://www.trustpilot.com/", d:"1-star reviews = product roadmaps. Read them like scripture.", t:"gold"},
+  {c:"gap", e:"💰", n:"Acquire.com", u:"https://acquire.com/", d:"Marketplace to buy/sell SaaS. See exactly which models are profitable.", t:"free"},
+  {c:"gap", e:"🏷️", n:"Flippa", u:"https://flippa.com/", d:"SaaS businesses for sale — reverse-engineer the idea, then build a better version.", t:"free"},
+  {c:"gap", e:"📉", n:"Baremetrics", u:"https://baremetrics.com/", d:"SaaS metrics benchmarks + idea inspiration from real revenue data.", t:"free"},
+  {c:"gap", e:"📖", n:"Starter Story", u:"https://www.starterstory.com/", d:"Case studies of businesses already making money. Copy the playbook.", t:"gold"},
+  {c:"gap", e:"👨‍💻", n:"Indie Hackers", u:"https://www.indiehackers.com/", d:"Raw founder stories with actual revenue numbers. The most honest source online.", t:"gold"},
+  {c:"gap", e:"📈", n:"Exploding Topics", u:"https://explodingtopics.com/", d:"Catch trends before they explode. Timing beats everything.", t:"gold"},
+  {c:"gap", e:"😤", n:"PainOnSocial", u:"https://painonsocial.com/", d:"Automatically extracts pain points from social media. Pure demand signal.", t:"free"},
+  {c:"gap", e:"💡", n:"BigIdeasDB", u:"https://bigideasdb.com/", d:"Database of validated business ideas with market data attached.", t:"free"},
+
+  /* MINE */
+  {c:"mine", e:"📡", n:"Syften", u:"https://syften.com/", d:"Tracks Reddit, Hacker News and Indie Hackers for your keywords, 24/7.", t:"free"},
+  {c:"mine", e:"🚢", n:"RedShip", u:"https://redship.io/", d:"Reddit monitoring + keyword alerts. Find demand the moment it's posted.", t:"free"},
+  {c:"mine", e:"📥", n:"Reddinbox", u:"https://reddinbox.com/", d:"Expands beyond Reddit into Quora and summarises pain points automatically.", t:"free"},
+  {c:"mine", e:"🔮", n:"Perplexity AI", u:"https://www.perplexity.ai/", d:"Research niches, find creators and validate demand with cited answers.", t:"free"},
+  {c:"mine", e:"⛏️", n:"AI Shovel Radar (Apify)", u:"https://apify.com/", d:"Scrapes marketplace signals to surface shovel-ready AI business ideas.", t:"free"},
+  {c:"mine", e:"🐙", n:"AI Services Toolkit (GitHub)", u:"https://github.com/cevnac99/ai-services-beginner-toolkit", d:"7 practical AI service playbooks you can start selling this week.", t:"free"},
+
+  /* LAUNCH */
+  {c:"launch", e:"🆕", n:"Uneed", u:"https://www.uneed.best/", d:"Product Hunt alternative — daily launches with less competition for attention.", t:"free"},
+  {c:"launch", e:"🎨", n:"Devpost", u:"https://devpost.com/", d:"Hackathon projects & launches. Half-finished ideas you can finish and ship.", t:"free"},
+  {c:"launch", e:"📅", n:"NextLaunch / Ruanyf Weekly", u:"https://github.com/ruanyf/weekly", d:"Curated weekly digest of new tools and tech — Chinese ecosystem included.", t:"free"},
+  {c:"launch", e:"🍰", n:"Half Baked — Problem Hunt", u:"https://read.gethalfbaked.com/", d:"Weekly problems worth solving, curated from real communities.", t:"gold"},
+
+  /* PROOF */
+  {c:"proof", e:"🔴", n:"r/SideProject — AI Idea Generator", u:"https://www.reddit.com/r/SideProject/comments/1c6ch2w/", d:"Tool scans 250+ subreddits for pain points and generates ideas with revenue estimates.", t:"free"},
+  {c:"proof", e:"💵", n:"Pulse Local — AI Budgeting", u:"https://pulseos.finance/", d:"Privacy-first budgeting app with on-device AI. All data stays on the machine.", t:"free"},
+  {c:"proof", e:"🧪", n:"Parsimony — AI Code Benchmark", u:"https://parsimony.lasu.dev/", d:"Open-source benchmark measuring how much code AI models add vs. remove.", t:"free"},
+  {c:"proof", e:"🎙️", n:"Famulor — AI Voice Reseller", u:"https://www.indiefounders.club/launches/famulor", d:"White-label platform to launch branded AI voice & chat assistants with billing.", t:"free"},
+  {c:"proof", e:"📴", n:"Pocket LLM — Offline AI Chat", u:"https://www.reddit.com/r/indiehackers/comments/1owb2e2/", d:"On-device iPhone chatbot running fully offline. No subscriptions, no cloud.", t:"free"},
+  {c:"proof", e:"⚖️", n:"Ceartas — AI DMCA Takedowns", u:"https://techcrunch.com/2024/04/30/devastated-by-his-image-being-posted-and-altered-online-rapper-turns-to-ai-to-fight-back/", d:"AI scans for unauthorised content and deepfakes, automates DMCA takedown notices.", t:"free"},
+  {c:"proof", e:"✉️", n:"Superhuman — AI Email", u:"https://superhuman.com/", d:"AI-enhanced email client built purely for speed. Saves hours per week.", t:"free"},
+  {c:"proof", e:"🎵", n:"Suno.ai — AI Music", u:"https://suno.ai/", d:"Generative AI that composes original songs from a text prompt.", t:"free"},
+  {c:"proof", e:"🩺", n:"Skinive — AI Skin Scanner", u:"https://skinive.com/", d:"Mobile dermatology AI for real-time skin lesion scanning and risk assessment.", t:"free"},
+  {c:"proof", e:"🔍", n:"Klu.ai — Enterprise Search", u:"https://klu.ai/", d:"AI-powered internal knowledge retrieval for teams. Enterprise search, solved.", t:"free"},
+  {c:"proof", e:"🧱", n:"Instance — No-Code App Builder", u:"https://instance.so/", d:"Generates iOS/Android/web apps from plain-English descriptions.", t:"free"},
+  {c:"proof", e:"🧠", n:"Me.bot — Personal Memory AI", u:"https://me.bot/", d:"AI 'second brain' that organises notes and enhances recall and creativity.", t:"free"},
+  {c:"proof", e:"✅", n:"IdeaProof — AI Idea Lists", u:"https://ideaproof.io/lists/ai-startup-ideas", d:"Curated AI startup idea lists with market research, competitor analysis and risk scoring.", t:"gold"},
+  {c:"proof", e:"📜", n:"AI Contract Review for SMBs", u:"https://ideaproof.io/lists/ai-startup-ideas", d:"Automated contract analysis flagging risks, missing clauses and negotiation tips.", t:"free"},
+  {c:"proof", e:"👔", n:"AI Recruiting for Niche Roles", u:"https://ideaproof.io/lists/ai-startup-ideas", d:"Screens and matches candidates for specialised roles using skill + culture-fit scoring.", t:"free"},
+  {c:"proof", e:"🔁", n:"AI Content Repurposing Engine", u:"https://ideaproof.io/lists/ai-startup-ideas", d:"Turns one long-form piece into posts, clips and images optimised per platform.", t:"free"},
+  {c:"proof", e:"🛍️", n:"AI E-commerce Support Bot", u:"https://ideaproof.io/lists/ai-startup-ideas", d:"Autonomously handles order tracking, returns and common store queries.", t:"free"},
+  {c:"proof", e:"🩻", n:"AI Medical Scribe", u:"https://ideaproof.io/lists/ai-startup-ideas", d:"Transcribes doctor–patient conversations into structured clinical notes.", t:"free"},
+  {c:"proof", e:"📧", n:"AI Sales Email Personalisation", u:"https://ideaproof.io/lists/ai-startup-ideas", d:"Composes hyper-personalised sales emails using real-time prospect research.", t:"free"}
+];
+
+const CATS = {
+  feeds:  {label:"Live Feeds", icon:"📡"},
+  db:     {label:"Idea Databases", icon:"📦"},
+  ai:     {label:"AI Idea Platforms", icon:"🤖"},
+  news:   {label:"News & Discovery", icon:"📰"},
+  gap:    {label:"Market Gap Discovery", icon:"🔍"},
+  mine:   {label:"Signal Mining", icon:"⛏️"},
+  launch: {label:"Launch Directories", icon:"🚀"},
+  proof:  {label:"Proven Idea Sources", icon:"💎"}
+};
+const ORDER = ["feeds","db","ai","news","gap","mine","launch","proof"];
+
+const vaultGrid = document.getElementById('vaultGrid');
+const chipsEl = document.getElementById('chips');
+const searchEl = document.getElementById('search');
+let activeCat = 'all';
+
+/* chips */
+const chipData = [{k:'all', label:'✦ All Sources'}].concat(
+  ORDER.map(k => ({k, label: CATS[k].icon + ' ' + CATS[k].label}))
+);
+chipData.forEach(c => {
+  const b = document.createElement('button');
+  b.className = 'chip' + (c.k === 'all' ? ' active' : '');
+  b.textContent = c.label;
+  b.dataset.k = c.k;
+  b.onclick = () => {
+    activeCat = c.k;
+    document.querySelectorAll('.chip').forEach(x => x.classList.toggle('active', x.dataset.k === c.k));
+    render();
+  };
+  chipsEl.appendChild(b);
+});
+
+function makeRow(item){
+  let host = '';
+  try { host = new URL(item.u).hostname.replace(/^www\./,''); } catch(e){ host = item.u; }
+
+  const tr = document.createElement('tr');
+  tr.dataset.name = (item.n + ' ' + item.d + ' ' + host).toLowerCase();
+
+  const tagClass = item.t === 'gold' ? 'gold' : item.t === 'live' ? 'live' : 'free';
+  const tagLabel = item.t === 'gold' ? '★ Gold' : item.t === 'live' ? '● Live' : 'Free';
+
+  tr.innerHTML = `
+    <td>
+      <div class="vn">
+        <div class="e">${item.e}</div>
+        <div class="txt">
+          <div class="nm">${item.n}</div>
+          <div class="h">${host}</div>
+        </div>
+      </div>
+    </td>
+    <td>${item.d}</td>
+    <td><span class="host-pill" style="display:inline-block;padding:4px 10px;border-radius:100px;background:rgba(201,138,30,.08);border:1px solid rgba(201,138,30,.18);font-size:.7rem;color:var(--amber);font-family:'JetBrains Mono',monospace;">${host}</span></td>
+    <td><span class="vtag ${tagClass}">${tagLabel}</span></td>
+    <td><button class="go-btn" title="Copy link" data-u="${item.u}">↗</button></td>
+  `;
+
+  const btn = tr.querySelector('.go-btn');
+  btn.onclick = async (e) => {
+    e.stopPropagation();
+    try { await navigator.clipboard.writeText(item.u); }
+    catch(err){
+      const ta = document.createElement('textarea');
+      ta.value = item.u; document.body.appendChild(ta);
+      ta.select(); document.execCommand('copy'); ta.remove();
+    }
+    btn.classList.add('copied');
+    btn.textContent = '✓';
+    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = '↗'; }, 1400);
+  };
+
+  tr.onclick = (e) => {
+    if (e.target.closest('.go-btn')) return;
+    window.open(item.u, '_blank', 'noopener,noreferrer');
+  };
+
+  return tr;
+}
+
+function render(){
+  const q = searchEl.value.trim().toLowerCase();
+  vaultGrid.innerHTML = '';
+  let total = 0;
+
+  ORDER.forEach(catKey => {
+    if (activeCat !== 'all' && activeCat !== catKey) return;
+
+    const items = DATA.filter(d =>
+      d.c === catKey && (!q || (d.n + ' ' + d.d + ' ' + d.u).toLowerCase().includes(q))
+    );
+    if (!items.length) return;
+
+    const group = document.createElement('div');
+    group.className = 'vault-group';
+
+    const head = document.createElement('div');
+    head.className = 'vault-head';
+    head.innerHTML = `
+      <div class="icon">${CATS[catKey].icon}</div>
+      <h3>${CATS[catKey].label}</h3>
+      <span class="count">${items.length} sources</span>
+    `;
+    group.appendChild(head);
+
+    const tw = document.createElement('div');
+    tw.className = 'vault-table';
+    const table = document.createElement('table');
+    table.innerHTML = `
+      <thead>
+        <tr>
+          <th style="width:28%">Source</th>
+          <th>What You Get</th>
+          <th style="width:14%">Domain</th>
+          <th style="width:10%">Type</th>
+          <th style="width:6%"></th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    `;
+    const tbody = table.querySelector('tbody');
+    items.forEach(it => tbody.appendChild(makeRow(it)));
+    tw.appendChild(table);
+    group.appendChild(tw);
+    vaultGrid.appendChild(group);
+
+    total += items.length;
+  });
+
+  if (!total){
+    vaultGrid.innerHTML = `<div style="text-align:center;padding:60px 20px;color:var(--muted);background:#fff;border-radius:16px;border:1px solid var(--stroke);">No sources match "<strong>${q}</strong>". Try "reddit", "ai", "saas", or "trends".</div>`;
+  }
+}
+
+let t;
+searchEl.addEventListener('input', () => {
+  clearTimeout(t);
+  t = setTimeout(render, 130);
+});
+
+render();
+</script>
+</body>
+</html>
